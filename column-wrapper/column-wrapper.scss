@@ -1,0 +1,194 @@
+@import '../../assets/scss/grid/default/responsive_config';
+@import '../../assets/scss/mixins/utility_mixins';
+@import '../../assets/scss/mixins/grid';
+$aos-distance: 40px; // This needs to stay above the input in order to work, it overrides the default distance that images animate
+@import 'node_modules/aos/src/sass/aos.scss';
+
+.column-wrapper {
+    @include apply_grid();
+    // Column Wrapper component-specific styles
+    &__inner-grid {
+        column-gap: 48px;
+        display: grid;
+    }
+
+    &__rounded-corners {
+        img:not(.country-code__flag) {
+            border-radius: 16px;
+        }
+        .column-content {
+            border-radius: 16px;
+
+            &__eyebrow {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                img {
+                    border-radius: 0;
+                    padding-right: 20px;
+                }
+
+                &:has(img) {
+                    padding-bottom: 22px;
+                }
+            }
+        }
+    }
+
+    // responsive
+    // as per Derek, this now applies to all breakpoints under 1023
+    @include media-max-width($sm-max-width - 1px) {
+        &__stack-columns {
+            .column-content {
+                order: 1;
+
+                &__components-wrapper {
+                    margin: 0 auto;
+                }
+
+                &__is-image {
+                    order: 0;
+                }
+            }
+
+            .column-wrapper {
+                &__inner-grid {
+                    grid-template-columns: 1fr;
+                    row-gap: 24px;
+                }
+            }
+        }
+
+        &__mobile-media {
+            .column-content {
+                &__is-image {
+                    order: 1;
+                }
+            }
+        }
+    }
+
+    @include media-min-width($xl-min-width) {
+        &__inner-grid {
+            column-gap: $gutter-xl;
+        }
+    }
+
+    @include media-min-width($lg-min-width) {
+        &__inner-grid {
+            column-gap: $gutter-lg;
+            grid-column-start: 1;
+            grid-column-end: end;
+        }
+    }
+
+    @include media-max-width($xs-max-width - 1px) {
+        &__inner-grid {
+            grid-column-start: 1 !important;
+            grid-column-end: end !important;
+        }
+    }
+
+    @include media-min-width($md-min-width) {
+        &__inner-grid {
+            column-gap: $gutter-md;
+        }
+    }
+
+    @include media-min-width($sm-min-width) {
+        &__inner-grid {
+            column-gap: $gutter-sm;
+        }
+    }
+
+    @include media-min-width($xs-min-width) {
+        &__inner-grid {
+            column-gap: $gutter-xs;
+        }
+    }
+
+    @include media-max-width($xxs-max-width) {
+        &__inner-grid {
+            grid-template-columns: 1fr;
+            row-gap: 24px;
+        }
+
+        .column-content {
+            order: 1;
+
+            &__is-image {
+                order: 0;
+            }
+        }
+
+        &__mobile-media {
+            .column-content {
+                &__is-image {
+                    order: 1;
+                }
+            }
+        }
+    }
+
+    &__magic-funnel-entry-column-wrapper {
+        .column-content__column__0--2 {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+
+            .column-content__text {
+                max-width: 440px;
+                padding-top: 70px;
+                padding-bottom: 70px;
+
+                @media (max-width: 834px) {
+                    max-width: 100%;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
+        }
+
+        @media (max-width: 834px) {
+            padding-bottom: 30px;
+
+            .column-wrapper__inner-grid {
+                display: flex;
+                flex-direction: column-reverse;
+
+                .column-content__column__0--2 {
+                    .notranslate {
+                        display: flex;
+                        justify-content: flex-start;
+
+                        form {
+                            .material-ui-field {
+                                margin-top: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 440px) {
+            .column-wrapper__inner-grid {
+                .notranslate {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    &__dynamicContent {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .pill {
+            margin-bottom: 8px;
+            margin-left: 0;
+        }
+    }
+}
